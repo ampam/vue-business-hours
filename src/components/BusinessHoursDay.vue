@@ -1,13 +1,14 @@
 <template>
   <div is="transition-group" name="fade">
     <div v-for="({ open, close, id, isOpen }, index) in hours" :key="id">
-      <div class="flex-table row" role="rowgroup">
+      <div v-if="showDay(index)" class="flex-table row" role="rowgroup">
+
         <div class="flex-row day" role="cell">
-          <div v-if="showDay(index)">{{ localization.days[day] }}</div>
+          <div>{{ localization.days[day] }}</div>
         </div>
+
         <div class="flex-row toggle" role="cell">
           <ToggleButton
-            v-if="showDay(index)"
             @change="
               toggleOpen();
               resetHours();
@@ -25,6 +26,10 @@
             :font-size="12"
           />
         </div>
+
+      </div>
+
+      <div class="flex-table row" role="rowgroup">
         <transition name="fade">
           <div class="flex-row hours open" role="cell" v-visible="isOpenToday">
             <BusinessHoursSelect
@@ -105,17 +110,16 @@
 <!--            <FontAwesomeIcon icon="times" class="fa-sm" />-->
             <icon class="w-6 h-6" icon="delete"/>
           </button>
-        </div>
-        <div class="flex-row add" role="cell" v-visible="isOpenToday">
           <button
-            type="button"
-            :style="{ color: color }"
-            class="add-hours"
-            v-if="showAddButton(index)"
-            @click="addRow()"
+              type="button"
+              :style="{ color: color }"
+              class="add-hours"
+              v-if="showAddButton(index)"
+              @click="addRow()"
           >
-            <icon class="w-6 h-6" icon="add"/>
+            <icon class="w-6 h-6" icon="plus"/>
           </button>
+
         </div>
       </div>
       <ul class="time-errors" v-if="validations[index].anyErrors">
