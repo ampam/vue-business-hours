@@ -102,7 +102,8 @@
             v-if="showRemoveButton()"
             @click="removeRow(index)"
           >
-            <FontAwesomeIcon icon="times" class="fa-sm" />
+<!--            <FontAwesomeIcon icon="times" class="fa-sm" />-->
+            <icon class="w-6 h-6" icon="check"/>
           </button>
         </div>
         <div class="flex-row add" role="cell" v-visible="isOpenToday">
@@ -133,13 +134,19 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { helperMixin } from '../mixins/helperMixin';
 import { validationMixin } from '../mixins/validationMixin';
 import uniqid from 'uniqid';
+
+import Icon from '@iconify/vue';
+import Delete from '@iconify-icons/mdi-light/delete';
+Icon.addIcon( 'delete', Delete );
+
 export default {
   name: 'BusinessHoursDay',
   components: {
     BusinessHoursSelect,
     BusinessHoursDatalist,
     ToggleButton,
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    Icon
   },
   mixins: [helperMixin, validationMixin],
   props: {
