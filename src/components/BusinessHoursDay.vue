@@ -103,7 +103,7 @@
             @click="removeRow(index)"
           >
 <!--            <FontAwesomeIcon icon="times" class="fa-sm" />-->
-            <icon class="w-6 h-6" icon="check"/>
+            <icon class="w-6 h-6" icon="delete"/>
           </button>
         </div>
         <div class="flex-row add" role="cell" v-visible="isOpenToday">
@@ -113,7 +113,9 @@
             class="add-hours"
             v-if="showAddButton(index)"
             @click="addRow()"
-          >{{ localization.addHours }}</button>
+          >
+            <icon class="w-6 h-6" icon="add"/>
+          </button>
         </div>
       </div>
       <ul class="time-errors" v-if="validations[index].anyErrors">
@@ -137,7 +139,9 @@ import uniqid from 'uniqid';
 
 import Icon from '@iconify/vue';
 import Delete from '@iconify-icons/mdi-light/delete';
+import Plus from '@iconify-icons/mdi-light/plus';
 Icon.addIcon( 'delete', Delete );
+Icon.addIcon( 'plus', Plus );
 
 export default {
   name: 'BusinessHoursDay',
